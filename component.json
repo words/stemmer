@@ -1,0 +1,16 @@
+{
+  "name": "stemmer",
+  "repository": "wooorm/stemmer",
+  "description": "A pretty fast implementation of the Porter Stemmer algorithm",
+  "version": "0.0.1",
+  "keywords": [
+    "martin",
+    "porter",
+    "stemmer",
+    "algorithm"
+  ],
+  "scripts" : [
+    "index.js"
+  ],
+  "license": "MIT"
+}
