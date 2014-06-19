@@ -27,7 +27,7 @@
     "lint-api": "node_modules/.bin/eslint index.js --env node --env browser --rule 'quotes: [2, single], no-cond-assign: false'",
     "lint-test": "node_modules/.bin/eslint spec/stemmer.spec.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false'",
     "lint-style": "node_modules/.bin/jscs index.js spec/stemmer.spec.js --reporter=inline",
-    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec spec/stemmer.spec.js",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/stemmer.spec.js",
     "make": "npm run-script lint && npm run-script coverage"
   },
   "testling": {
