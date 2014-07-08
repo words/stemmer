@@ -11,9 +11,10 @@
   "author": "Titus Wormer <tituswormer@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^0.6.2",
     "istanbul": "~0.2.11",
     "jscs": "^1.5.3",
-    "eslint": "^0.6.2",
+    "matcha": "^0.5.0",
     "mocha": "~1.20.1"
   },
   "repository": {
@@ -23,11 +24,14 @@
   "scripts": {
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/stemmer.spec.js",
     "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/stemmer.spec.js",
-    "lint": "npm run-script lint-api && npm run-script lint-test && npm run-script lint-style",
+    "lint": "npm run lint-api && npm run lint-test && npm run lint-style && npm run lint-benchmark",
     "lint-api": "node_modules/.bin/eslint index.js --env node --env browser --rule 'quotes: [2, single], no-cond-assign: false'",
+    "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global suite,set,bench --rule 'quotes: [2, single]'",
     "lint-test": "node_modules/.bin/eslint spec/stemmer.spec.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false'",
-    "lint-style": "node_modules/.bin/jscs index.js spec/stemmer.spec.js --reporter=inline",
+    "lint-style": "node_modules/.bin/jscs index.js spec/stemmer.spec.js benchmark/index.js --reporter=inline",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/stemmer.spec.js",
-    "make": "npm run-script lint && npm run-script coverage"
+    "install-benchmark": "npm install porter-stemmer && npm install natural",
+    "benchmark": "node_modules/.bin/matcha",
+    "make": "npm run lint && npm run coverage"
   }
 }
