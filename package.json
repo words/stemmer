@@ -1,6 +1,6 @@
 {
   "name": "stemmer",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A pretty fast implementation of the Porter Stemmer algorithm",
   "keywords": [
     "martin",
