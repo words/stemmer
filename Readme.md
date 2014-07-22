@@ -42,13 +42,13 @@ On a MacBook Air, it runs about 751,000 op/s, which is more than twice as fast a
 
 ```
            stemmer — this module
-  751 op/s » op/s * 1,000
+  747 op/s » op/s * 1,000
 
            porterStemmer
-  363 op/s » op/s * 1,000
+  367 op/s » op/s * 1,000
 
-           natural - fails on 1229 out of 23532 unit tests
-   69 op/s » op/s * 1,000
+           natural - fails on 558 out of 23532 unit tests
+   59 op/s » op/s * 1,000
 ```
 
 ## License

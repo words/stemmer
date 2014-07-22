@@ -51,7 +51,7 @@ suite('porterStemmer', function () {
     });
 });
 
-suite('natural - fails on 1229 out of 23532 unit tests', function () {
+suite('natural - fails on 558 out of 23532 unit tests', function () {
     bench('op/s * 1,000', function (next) {
         var iterator = -1,
             value;
