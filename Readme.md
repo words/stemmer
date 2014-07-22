@@ -26,7 +26,7 @@ stemmer("vileness"); // "vile"
 
 ## Other Porter Stemmer implementations
 
-- [NaturalNode/natural](https://github.com/NaturalNode/natural) — Currently [buggy](https://github.com/NaturalNode/natural/issues/167).
+- [NaturalNode/natural](https://github.com/NaturalNode/natural) — Currently [buggy](https://github.com/NaturalNode/natural/issues/176).
 - [jedp/porter-stemmer](https://github.com/jedp/porter-stemmer) — Has a nice memorizing feature, which might be useful!
 
 ## Benchmark
