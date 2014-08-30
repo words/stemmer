@@ -1,5 +1,5 @@
 
-n.n.n / 2014-08-30
+0.1.1 / 2014-08-30
 ==================
 
  * Fix: add support for mixed-case input
