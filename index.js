@@ -96,7 +96,7 @@ EXPRESSION_STEP_4 = new RegExp(
 function stemmer(value) {
     var firstCharacterWasLowerCaseY, match;
 
-    value = value.toString();
+    value = value.toString().toLowerCase();
 
     if (value.length < 3) {
         return value;
