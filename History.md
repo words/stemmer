@@ -1,4 +1,14 @@
 
+n.n.n / 2014-08-30
+==================
+
+ * Fix: add support for mixed-case input
+ * Update mocha
+ * Added components to gitignore
+ * Update error-count of Natural
+ * Update Natural description with new issue link
+ * Update eslint, istanbul
+
 0.1.0 / 2014-07-08
 ==================
 
