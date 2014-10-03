@@ -4,14 +4,19 @@ A pretty fast version of the [Porter stemming algorithm](http://tartarus.org/mar
 
 ## Installation
 
-NPM:
+npm:
 ```sh
 $ npm install stemmer
 ```
 
-Component.js:
+Component:
 ```sh
 $ component install wooorm/stemmer
+```
+
+Bower:
+```sh
+$ bower install stemmer
 ```
 
 ## Usage
