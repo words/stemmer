@@ -36,24 +36,17 @@ stemmer("vileness"); // "vile"
 
 ## Benchmark
 
-Run the benchmark yourself:
-
-```sh
-$ npm run install-benchmark # Just once of course.
-$ npm run benchmark
-```
-
-On a MacBook Air, it runs about 751,000 op/s, which is more than twice as fast as the runner-up.
+On a MacBook Air, it runs about 688,000 op/s.
 
 ```
            stemmer — this module
-  747 op/s » op/s * 1,000
+  688 op/s » op/s * 1,000
 
            porterStemmer
-  367 op/s » op/s * 1,000
+  372 op/s » op/s * 1,000
 
            natural - fails on 558 out of 23532 unit tests
-   59 op/s » op/s * 1,000
+   63 op/s » op/s * 1,000
 ```
 
 ## License
