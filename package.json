@@ -2,24 +2,24 @@
   "name": "stemmer",
   "version": "0.1.1",
   "description": "A pretty fast implementation of the Porter Stemmer algorithm",
+  "license": "MIT",
   "keywords": [
     "martin",
     "porter",
     "stemmer",
     "algorithm"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/stemmer.git"
+  },
   "author": "Titus Wormer <tituswormer@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
     "eslint": "^0.8.0",
     "istanbul": "^0.3.0",
     "jscs": "^1.6.0",
     "matcha": "^0.5.0",
     "mocha": "^1.20.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/stemmer.git"
   },
   "scripts": {
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/stemmer.spec.js",
