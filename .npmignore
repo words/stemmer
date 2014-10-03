@@ -1,2 +1,8 @@
+node_modules
+bower_components
+components
+build
 coverage
+.DS_Store
 .travis.yml
+*.log
