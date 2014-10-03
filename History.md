@@ -1,4 +1,19 @@
 
+n.n.n / 2014-10-03
+==================
+
+ * Add npm deployment to travis
+ * Remove `npm update npm` from travis
+ * Refactor benchmark
+ * Refactor API
+ * Refactor spec
+ * Update Installation in docs
+ * Add bower.json
+ * Reorder properties in package.json, component.json
+ * Update copyright in Readme.md
+ * Update eslint, broaden jscs and mocha version ranges
+ * Update .npmignore, .gitignore
+
 0.1.1 / 2014-08-30
 ==================
 
