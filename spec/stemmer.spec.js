@@ -1,29 +1,49 @@
 'use strict';
 
-var stemmer, assert, fs, inputs, outputs, iterator;
+/**
+ * Dependencies.
+ */
+
+var stemmer,
+    assert,
+    fs;
 
 stemmer = require('..');
 assert = require('assert');
 fs = require('fs');
 
+/**
+ * Fixtures.
+ */
+
+var inputs,
+    outputs;
+
+inputs = fs.readFileSync('./spec/input.txt', 'utf-8').split('\n');
+outputs = fs.readFileSync('./spec/output.txt', 'utf-8').split('\n');
+
+/**
+ * Tests.
+ */
+
 describe('stemmer()', function () {
-    it('should be of type `function`', function () {
+    it('should be a `function`', function () {
         assert(typeof stemmer === 'function');
     });
 });
 
-inputs = fs.readFileSync('./spec/input.txt', 'utf-8').split('\n');
-outputs = fs.readFileSync('./spec/output.txt', 'utf-8').split('\n');
-iterator = -1;
-
-function assertStem(input, output) {
-    it('should stem `' + input + '` to `' + output + '`', function () {
-        assert(stemmer(input) === output);
-    });
-}
-
 describe('stemming', function () {
-    while (inputs[++iterator]) {
-        assertStem(inputs[iterator], outputs[iterator]);
+    var index;
+
+    function assertStem(input, output) {
+        it('should stem `' + input + '` to `' + output + '`', function () {
+            assert(stemmer(input) === output);
+        });
+    }
+
+    index = -1;
+
+    while (inputs[++index]) {
+        assertStem(inputs[index], outputs[index]);
     }
 });
