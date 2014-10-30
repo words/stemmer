@@ -19,8 +19,8 @@ fs = require('fs');
 var inputs,
     outputs;
 
-inputs = fs.readFileSync('./spec/input.txt', 'utf-8').split('\n');
-outputs = fs.readFileSync('./spec/output.txt', 'utf-8').split('\n');
+inputs = fs.readFileSync('./test/input.txt', 'utf-8').split('\n');
+outputs = fs.readFileSync('./test/output.txt', 'utf-8').split('\n');
 
 /**
  * Tests.
