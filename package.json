@@ -26,12 +26,12 @@
     "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
     "lint": "npm run lint-api && npm run lint-test && npm run lint-style && npm run lint-benchmark",
     "lint-api": "node_modules/.bin/eslint index.js --env node --env browser --rule 'quotes: [2, single], no-cond-assign: false'",
-    "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global suite,set,bench --rule 'quotes: [2, single]'",
+    "lint-benchmark": "node_modules/.bin/eslint benchmark.js --env node --global suite,set,bench --rule 'quotes: [2, single]'",
     "lint-test": "node_modules/.bin/eslint test/index.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false'",
-    "lint-style": "node_modules/.bin/jscs index.js test/index.js benchmark/index.js --reporter=inline",
+    "lint-style": "node_modules/.bin/jscs index.js test/index.js benchmark.js --reporter=inline",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
     "install-benchmark": "npm install porter-stemmer && npm install natural",
-    "benchmark": "node_modules/.bin/matcha",
+    "benchmark": "node_modules/.bin/matcha benchmark.js",
     "make": "npm run lint && npm run coverage"
   }
 }

@@ -9,7 +9,7 @@
 var fs,
     stemmer;
 
-stemmer = require('..');
+stemmer = require('./');
 fs = require('fs');
 
 /**
@@ -48,7 +48,7 @@ if (hasError) {
 
 var fixtures;
 
-fixtures = fs.readFileSync('./spec/input.txt', 'utf-8')
+fixtures = fs.readFileSync('./test/input.txt', 'utf-8')
     .split('\n')
     .slice(0, 1000);
 
