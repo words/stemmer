@@ -1,4 +1,4 @@
-# stemmer [![Build Status](https://travis-ci.org/wooorm/stemmer.svg?branch=master)](https://travis-ci.org/wooorm/stemmer) [![Coverage Status](https://img.shields.io/coveralls/wooorm/stemmer.svg)](https://coveralls.io/r/wooorm/stemmer?branch=master)
+# stemmer [![Build Status](https://img.shields.io/travis/wooorm/stemmer.svg?style=flat)](https://travis-ci.org/wooorm/stemmer) [![Coverage Status](https://img.shields.io/coveralls/wooorm/stemmer.svg?style=flat)](https://coveralls.io/r/wooorm/stemmer?branch=master)
 
 A pretty fast version of the [Porter stemming algorithm](http://tartarus.org/martin/PorterStemmer/).
 
