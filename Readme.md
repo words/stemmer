@@ -2,6 +2,8 @@
 
 A pretty fast version of the [Porter stemming algorithm](http://tartarus.org/martin/PorterStemmer/).
 
+> **Check out [wooorm/stmr.c](https://github.com/wooorm/stmr.c) for an even faster version**
+
 ## Installation
 
 npm:
