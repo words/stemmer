@@ -16,6 +16,9 @@
     "url": "https://github.com/wooorm/stemmer.git"
   },
   "author": "Titus Wormer <tituswormer@gmail.com>",
+  "bin": {
+    "stemmer": "cli.js"
+  },
   "devDependencies": {
     "eslint": "^0.10.0",
     "istanbul": "^0.3.0",
@@ -30,9 +33,10 @@
     "coverage": "istanbul cover _mocha -- -- test/index.js",
     "lint-api": "eslint --rule no-cond-assign:false index.js",
     "lint-benchmark": "eslint --global suite,set,bench benchmark.js",
+    "lint-cli": "eslint --rule no-process-exit:false cli.js",
     "lint-test": "eslint --env mocha test/index.js",
-    "lint-style": "jscs --reporter inline index.js benchmark.js test/index.js",
-    "lint": "npm run lint-api && npm run lint-benchmark && npm run lint-test && npm run lint-style",
+    "lint-style": "jscs --reporter inline index.js benchmark.js cli.js test/index.js",
+    "lint": "npm run lint-api && npm run lint-benchmark && npm run lint-cli && npm run lint-test && npm run lint-style",
     "make": "npm run lint && npm run coverage",
     "install-benchmark": "npm install porter-stemmer && npm install natural",
     "benchmark": "matcha benchmark.js"

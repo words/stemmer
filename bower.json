@@ -28,6 +28,7 @@
     "node_modules/",
     "test/",
     "benchmark.js",
+    "cli.js",
     "component.json",
     "package.json"
   ]
