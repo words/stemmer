@@ -22,16 +22,16 @@
     "mocha": "^2.0.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
-    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
-    "lint": "npm run lint-api && npm run lint-test && npm run lint-style && npm run lint-benchmark",
-    "lint-api": "node_modules/.bin/eslint index.js --rule 'no-cond-assign: false'",
-    "lint-benchmark": "node_modules/.bin/eslint benchmark.js --global suite,set,bench",
-    "lint-test": "node_modules/.bin/eslint test/index.js --env mocha",
-    "lint-style": "node_modules/.bin/jscs index.js test/index.js benchmark.js --reporter=inline",
-    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
+    "test": "_mocha --check-leaks test/index.js",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- --check-leaks test/index.js",
+    "coverage": "istanbul cover _mocha -- -- test/index.js",
+    "lint-api": "eslint --rule no-cond-assign:false index.js",
+    "lint-benchmark": "eslint --global suite,set,bench benchmark.js",
+    "lint-test": "eslint --env mocha test/index.js",
+    "lint-style": "jscs --reporter inline index.js benchmark.js test/index.js",
+    "lint": "npm run lint-api && npm run lint-benchmark && npm run lint-test && npm run lint-style",
+    "make": "npm run lint && npm run coverage",
     "install-benchmark": "npm install porter-stemmer && npm install natural",
-    "benchmark": "node_modules/.bin/matcha benchmark.js",
-    "make": "npm run lint && npm run coverage"
+    "benchmark": "matcha benchmark.js"
   }
 }
