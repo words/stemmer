@@ -39,6 +39,37 @@ stemmer("detestable"); // "detest"
 stemmer("vileness"); // "vile"
 ```
 
+## CLI
+
+Install:
+
+```bash
+npm install --global stemmer
+```
+
+Use:
+
+```text
+Usage: stemmer [options] <words...>
+
+A pretty fast implementation of the Porter Stemmer algorithm
+
+Options:
+
+  -h, --help           output usage information
+  -v, --version        output version number
+
+Usage:
+
+# output stems
+$ stemmer considerations
+# consider
+
+# output stems from stdin
+$ echo "detestable vileness" | stemmer
+# detest vile
+```
+
 ## Other Porter Stemmer implementations
 
 - [NaturalNode/natural](https://github.com/NaturalNode/natural) — Currently [buggy](https://github.com/NaturalNode/natural/issues/176).
