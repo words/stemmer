@@ -7,7 +7,9 @@
     "martin",
     "porter",
     "stemmer",
-    "algorithm"
+    "algorithm",
+    "cli",
+    "bin"
   ],
   "repository": {
     "type": "git",
