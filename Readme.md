@@ -53,4 +53,4 @@ On a MacBook Air, it runs about 688,000 op/s.
 
 ## License
 
-MIT @ Titus Wormer
+[MIT](LICENSE) @ Titus Wormer
