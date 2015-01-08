@@ -6,24 +6,32 @@ A pretty fast version of the [Porter stemming algorithm](http://tartarus.org/mar
 
 ## Installation
 
-npm:
-```sh
+[npm](https://docs.npmjs.com/cli/install):
+
+```bash
 $ npm install stemmer
 ```
 
-Component:
-```sh
+[Component.js](https://github.com/componentjs/component):
+
+```bash
 $ component install wooorm/stemmer
 ```
 
-Bower:
-```sh
+[Bower](http://bower.io/#install-packages):
+
+```bash
 $ bower install stemmer
 ```
 
+[Duo](http://duojs.org/#getting-started):
+
+```javascript
+var stemmer = require('wooorm/stemmer');
+```
 ## Usage
 
-```js
+```javascript
 var stemmer = require('stemmer');
 
 stemmer("considerations"); // "consider"
@@ -40,7 +48,7 @@ stemmer("vileness"); // "vile"
 
 On a MacBook Air, it runs about 688,000 op/s.
 
-```
+```text
            stemmer — this module
   688 op/s » op/s * 1,000
 
