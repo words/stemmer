@@ -1,8 +1,6 @@
 'use strict';
 
-/* eslint-disable no-cond-assign */
-
-/**
+/*
  * Dependencies.
  */
 
@@ -12,7 +10,7 @@ var fs,
 stemmer = require('./');
 fs = require('fs');
 
-/**
+/*
  * Optional dependencies.
  */
 
@@ -42,7 +40,7 @@ if (hasError) {
     );
 }
 
-/**
+/*
  * Fixtures.
  */
 
@@ -54,32 +52,27 @@ fixtures = fs.readFileSync('./test/input.txt', 'utf-8')
 
 /**
  * Fixture loop.
+ *
+ * @param {function(string)} callback
  */
-
-function forEachFixture(callback) {
-    var index;
-
-    index = fixtures.length;
-
-    while (index--) {
-        callback(fixtures[index]);
-    }
+function eachFixture(callback) {
+    fixtures.forEach(callback);
 }
 
-/**
+/*
  * Benchmarks.
  */
 
 suite('stemmer — this module', function () {
     bench('op/s * 1,000', function () {
-        forEachFixture(stemmer);
+        eachFixture(stemmer);
     });
 });
 
 if (porterStemmer) {
     suite('porterStemmer', function () {
         bench('op/s * 1,000', function () {
-            forEachFixture(porterStemmer);
+            eachFixture(porterStemmer);
         });
     });
 }
@@ -87,7 +80,7 @@ if (porterStemmer) {
 if (natural) {
     suite('natural - fails on 558 out of 23532 unit tests', function () {
         bench('op/s * 1,000', function () {
-            forEachFixture(natural);
+            eachFixture(natural);
         });
     });
 }

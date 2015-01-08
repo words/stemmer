@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Define few standard suffix manipulations.
  */
 
@@ -41,7 +41,7 @@ step3list = {
     'ness': ''
 };
 
-/**
+/*
  * Define few consonant-vowel sequences.
  */
 
@@ -82,7 +82,7 @@ EXPRESSION_CONSONANT_LIKE = new RegExp(
     '^' + consonantSequence + vowel + '[^aeiouwxy]$'
 );
 
-/**
+/*
  * Define few exception-expressions.
  */
 
@@ -133,7 +133,7 @@ EXPRESSION_STEP_4 = new RegExp(
     'iti|ous|ive|ize)$'
 );
 
-/**
+/*
  * Detect the character code for `y`.
  */
 
@@ -142,19 +142,18 @@ var CHARACTER_CODE_Y;
 CHARACTER_CODE_Y = 'y'.charCodeAt(0);
 
 /**
- * Define `stemmer`.
+ * Stem `value`.
  *
  * @param {string} value
- * @return {string} Stem corresponding to `value`.
+ * @return {string} - Stem corresponding to `value`.
  */
-
 function stemmer(value) {
     var firstCharacterWasLowerCaseY,
         match;
 
     value = String(value).toLowerCase();
 
-    /**
+    /*
      * Exit early.
      */
 
@@ -162,7 +161,7 @@ function stemmer(value) {
         return value;
     }
 
-    /**
+    /*
      * Detect initial `y`, make sure it never
      * matches.
      */
@@ -172,31 +171,31 @@ function stemmer(value) {
         value = 'Y' + value.substr(1);
     }
 
-    /**
+    /*
      * Step 1a.
      */
 
     if (EXPRESSION_SUFFIX_SSES_OR_IES.test(value)) {
-        /**
+        /*
          * Remove last two characters.
          */
 
         value = value.substr(0, value.length - 2);
     } else if (EXPRESSION_SUFFIX_S.test(value)) {
-        /**
+        /*
          * Remove last character.
          */
 
         value = value.substr(0, value.length - 1);
     }
 
-    /**
+    /*
      * Step 1b.
      */
 
     if (match = EXPRESSION_SUFFIX_EED.exec(value)) {
         if (EXPRESSION_MEASURE_GREATER_THAN_0.test(match[1])) {
-            /**
+            /*
              * Remove last character.
              */
 
@@ -209,7 +208,7 @@ function stemmer(value) {
         value = match[1];
 
         if (EXPRESSION_SUFFIX_AT_OR_BL_OR_IZ.test(value)) {
-            /**
+            /*
              * Append `e`.
              */
 
@@ -217,13 +216,13 @@ function stemmer(value) {
         } else if (
             EXPRESSION_SUFFIX_MULTI_CONSONANT_LIKE.test(value)
         ) {
-            /**
+            /*
              * Remove last character.
              */
 
             value = value.substr(0, value.length - 1);
         } else if (EXPRESSION_CONSONANT_LIKE.test(value)) {
-            /**
+            /*
              * Append `e`.
              */
 
@@ -231,7 +230,7 @@ function stemmer(value) {
         }
     }
 
-    /**
+    /*
      * Step 1c.
      */
 
@@ -239,14 +238,14 @@ function stemmer(value) {
         (match = EXPRESSION_SUFFIX_Y.exec(value)) &&
         EXPRESSION_VOWEL_IN_STEM.test(match[1])
     ) {
-        /**
+        /*
          * Remove suffixing `y` and append `i`.
          */
 
         value = match[1] + 'i';
     }
 
-    /**
+    /*
      * Step 2.
      */
 
@@ -257,7 +256,7 @@ function stemmer(value) {
         value = match[1] + step2list[match[2]];
     }
 
-    /**
+    /*
      * Step 3.
      */
 
@@ -268,7 +267,7 @@ function stemmer(value) {
         value = match[1] + step3list[match[2]];
     }
 
-    /**
+    /*
      * Step 4.
      */
 
@@ -283,7 +282,7 @@ function stemmer(value) {
         value = match[1];
     }
 
-    /**
+    /*
      * Step 5.
      */
 
@@ -307,7 +306,7 @@ function stemmer(value) {
         value = value.substr(0, value.length - 1);
     }
 
-    /**
+    /*
      * Turn initial `Y` back to `y`.
      */
 
@@ -318,7 +317,7 @@ function stemmer(value) {
     return value;
 }
 
-/**
+/*
  * Expose `stemmer`.
  */
 
