@@ -70,11 +70,6 @@ $ echo "detestable vileness" | stemmer
 # detest vile
 ```
 
-## Other Porter Stemmer implementations
-
-- [NaturalNode/natural](https://github.com/NaturalNode/natural) — Currently [buggy](https://github.com/NaturalNode/natural/issues/176).
-- [jedp/porter-stemmer](https://github.com/jedp/porter-stemmer) — Has a nice memorizing feature, which might be useful!
-
 ## Benchmark
 
 On a MacBook Air, it runs about 688,000 op/s.
