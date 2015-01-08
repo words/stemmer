@@ -1,4 +1,26 @@
 
+n.n.n / 2015-01-08
+==================
+
+  * Remove related projects from `Readme.md`
+  * Add CLI-usage to `Readme.md`
+  * Add tests to `test/index.sh`
+  * Add CLI to `cli.js`
+  * Add `test/index.sh`
+  * Fix incorrect executive rights on `test/index.js`
+  * Add `cli.js`
+  * Add `cli`, `bin` to keywords
+  * Update copyright notice in `LICENSE` to include 2015
+  * Add Duo as an instalation method in `Readme.md`
+  * Add link to whole license in `Readme.md`
+  * Refactor to adhere to strict jsdoc style
+  * Add jscs-jsdoc configuration to `.jscs.json`
+  * Add jscs-jsdoc as a dev-dependency
+  * Refactor npm scripts for changes in npm
+  * Update matcha
+  * Update eslint
+  * Add mention of `stmr.c` to `Readme.md`
+
 0.1.3 / 2014-10-30
 ==================
 
