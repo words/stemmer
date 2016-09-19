@@ -1,13 +1,25 @@
 language: node_js
-script: npm run-script test-travis
 node_js:
-- '0.10'
 - '0.11'
-after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+- '5.0'
+- '6.0'
+sudo: false
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 deploy:
-  provider: npm
-  email: tituswormer@gmail.com
-  api_key:
-    secure: MMkXhcQyPodeIRs/xkhZnUmOCDAN+ntIdzPCIt9l+JaO3CjQKD+VVFCniNGBhmLg18e7avy/4FThs5tNq4XFjWpHoedRJskZytdKA3NioCVq7Wvrc3GQTAWNya7AONSNYiqvEakENCEVa6a+BMsuAq0kR+H/6eyDSBCXCyTkbHg=
-  on:
-    repo: wooorm/stemmer
+  - provider: npm
+    email: tituswormer@gmail.com
+    api_key:
+      secure: U3D7Tp9sCBj5Ko0/BeUzUnM7omNBGQV6xkEiU+Okd05pa7cU5H2f29WmlsXdZlM4dLC+FTPEhghCOZAMA3CMIdh9mPzhoBTysYJhy10MUsr7+L14GMqU5mIMqT/2bU0Bq59GSUCASQv99utQwvoYJSx0VOhBlTmLLfgD1LGlJiM=
+    on:
+      tags: true
+      node: '5.0'
+  - provider: releases
+    api_key:
+      secure: cvJcLIMqMmidHPli3Y1SUtbd3xhJ23fbZIvpRvVSbGlRs1wVi9UvEknNMgFsDJN0XG/iTnDQZ/pAhJjBDayVmRe7yUBMHaaPzKVtYZ8Xqyo7dncdlAoS2GiCf1/QwihG6Qj/blfsK/YbL08pIztrEuhhFzgBv24u7FNPk0UTdV4=
+    file:
+      - "stemmer.js"
+      - "stemmer.min.js"
+    on:
+      tags: true
+      node: '6.0'

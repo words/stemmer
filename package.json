@@ -1,7 +1,7 @@
 {
   "name": "stemmer",
   "version": "0.1.4",
-  "description": "A pretty fast implementation of the Porter Stemmer algorithm",
+  "description": "Porter Stemmer algorithm",
   "license": "MIT",
   "keywords": [
     "martin",
@@ -11,36 +11,60 @@
     "cli",
     "bin"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/stemmer.git"
+  "repository": "https://github.com/wooorm/stemmer",
+  "bugs": "https://github.com/wooorm/stemmer/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "engines": {
+    "node": ">=0.11.0"
   },
-  "author": "Titus Wormer <tituswormer@gmail.com>",
-  "bin": {
-    "stemmer": "cli.js"
-  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "bin": "cli.js",
+  "main": "index.js",
+  "dependencies": {},
   "devDependencies": {
-    "eslint": "^0.10.0",
-    "istanbul": "^0.3.0",
-    "jscs": "^1.0.0",
-    "jscs-jsdoc": "^0.4.0",
-    "matcha": "^0.6.0",
-    "mocha": "^2.0.0"
+    "browserify": "^13.0.0",
+    "esmangle": "^1.0.0",
+    "execa": "^0.4.0",
+    "nyc": "^8.3.0",
+    "remark-cli": "^2.0.0",
+    "remark-preset-wooorm": "^1.0.0",
+    "tape": "^4.4.0",
+    "xo": "^0.16.0"
   },
   "scripts": {
-    "test": "_mocha --check-leaks test/index.js",
-    "test-cli": "bash test/index.sh",
-    "test-coveralls": "istanbul cover _mocha --report lcovonly -- --check-leaks test/index.js",
-    "test-travis": "npm run test-cli && npm run test-coveralls",
-    "coverage": "istanbul cover _mocha -- -- test/index.js",
-    "lint-api": "eslint --rule no-cond-assign:false index.js",
-    "lint-benchmark": "eslint --global suite,set,bench benchmark.js",
-    "lint-cli": "eslint --rule no-process-exit:false cli.js",
-    "lint-test": "eslint --env mocha test/index.js",
-    "lint-style": "jscs --reporter inline index.js benchmark.js cli.js test/index.js",
-    "lint": "npm run lint-api && npm run lint-benchmark && npm run lint-cli && npm run lint-test && npm run lint-style",
-    "make": "npm run lint && npm run coverage",
-    "install-benchmark": "npm install porter-stemmer && npm install natural",
-    "benchmark": "matcha benchmark.js"
+    "build-md": "remark . --quiet --frail",
+    "build-bundle": "browserify index.js -s stemmer > stemmer.js",
+    "build-mangle": "esmangle stemmer.js > stemmer.min.js",
+    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
+    "lint": "xo",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test/index.js",
+    "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "no-cond-assign": "off",
+      "complexity": "off"
+    },
+    "ignores": [
+      "stemmer.js"
+    ]
+  },
+  "remarkConfig": {
+    "output": true,
+    "presets": "wooorm"
   }
 }

@@ -1,116 +1,68 @@
 #!/usr/bin/env node
+/**
+ * @author Titus Wormer
+ * @copyright 2014 Titus Wormer
+ * @license MIT
+ * @module stemmer
+ * @fileoverview CLI for `stemmer`.
+ */
+
 'use strict';
 
-/*
- * Dependencies.
- */
+/* Dependencies. */
+var pack = require('./package.json');
+var stemmer = require('./');
 
-var stemmer,
-    pack;
+/* Arguments. */
+var argv = process.argv.slice(2);
 
-pack = require('./package.json');
-stemmer = require('./');
-
-/*
- * Detect if a value is expected to be piped in.
- */
-
-var expextPipeIn;
-
-expextPipeIn = !process.stdin.isTTY;
-
-/*
- * Arguments.
- */
-
-var argv;
-
-argv = process.argv.slice(2);
-
-/*
- * Command.
- */
-
-var command;
-
-command = Object.keys(pack.bin)[0];
-
-/**
- * Get the distance for a word.
- *
- * @param {Array.<string>} values
- * @return {string}
- */
-function stems(values) {
-    return values.map(stemmer).join(' ');
-}
-
-/**
- * Help.
- *
- * @return {string}
- */
-function help() {
-    return [
-        '',
-        'Usage: ' + command + ' [options] <words...>',
-        '',
-        pack.description,
-        '',
-        'Options:',
-        '',
-        '  -h, --help           output usage information',
-        '  -v, --version        output version number',
-        '',
-        'Usage:',
-        '',
-        '# output stems',
-        '$ ' + command + ' considerations',
-        '# ' + stems(['considerations']),
-        '',
-        '# output stems from stdin',
-        '$ echo "detestable vileness" | ' + command,
-        '# ' + stems(['detestable', 'vileness']),
-        ''
-    ].join('\n  ') + '\n';
-}
-
-/**
- * Get the edit distance for a list containing one word.
- *
- * @param {Array.<string>} values
- */
-function getStems(values) {
-    if (values.length) {
-        console.log(stems(values));
-    } else {
-        process.stderr.write(help());
-        process.exit(1);
-    }
-}
-
-/*
- * Program.
- */
-
+/* Program. */
 if (
-    argv.indexOf('--help') !== -1 ||
-    argv.indexOf('-h') !== -1
+  argv.indexOf('--help') !== -1 ||
+  argv.indexOf('-h') !== -1
 ) {
-    console.log(help());
+  console.log(help());
 } else if (
-    argv.indexOf('--version') !== -1 ||
-    argv.indexOf('-v') !== -1
+  argv.indexOf('--version') !== -1 ||
+  argv.indexOf('-v') !== -1
 ) {
-    console.log(pack.version);
+  console.log(pack.version);
 } else if (argv.length) {
-    getStems(argv.join(' ').split(/\s+/g));
-} else if (!expextPipeIn) {
-    getStems([]);
+  console.log(stem(argv.join(' ')));
 } else {
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', function (data) {
-        getStems(data.trim().split(/\s+/g));
-    });
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', function (data) {
+    console.log(stem(data));
+  });
+}
+
+/* Core. */
+function stem(values) {
+  return values.split(/\s+/g).map(stemmer).join(' ');
+}
+
+/* Help. */
+function help() {
+  return [
+    '',
+    'Usage: ' + pack.name + ' [options] <words...>',
+    '',
+    pack.description,
+    '',
+    'Options:',
+    '',
+    '  -h, --help           output usage information',
+    '  -v, --version        output version number',
+    '',
+    'Usage:',
+    '',
+    '# output stemmerality',
+    '$ ' + pack.name + ' @',
+    '# ' + stemmer('@'),
+    '',
+    '# output stemmerality from stdin',
+    '$ echo \'الانجليزية\' | ' + pack.name,
+    '# ' + stemmer('الانجليزية')
+  ].join('\n  ') + '\n';
 }

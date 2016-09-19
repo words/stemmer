@@ -1,55 +1,69 @@
+/**
+ * @author Titus Wormer
+ * @copyright 2014 Titus Wormer
+ * @license MIT
+ * @module stemmer
+ * @fileoverview Test suite for `stemmer`.
+ */
+
 'use strict';
 
-/*
- * Dependencies.
- */
+/* Dependencies. */
+var fs = require('fs');
+var path = require('path');
+var PassThrough = require('stream').PassThrough;
+var test = require('tape');
+var execa = require('execa');
+var version = require('../package').version;
+var stemmer = require('..');
 
-var stemmer,
-    assert,
-    fs;
+/* Fixtures. */
+var inputs = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf8').split('\n');
+var outputs = fs.readFileSync(path.join(__dirname, 'output.txt'), 'utf8').split('\n');
 
-stemmer = require('..');
-assert = require('assert');
-fs = require('fs');
+/* API. */
+test('api', function (t) {
+  inputs.forEach(function (input, index) {
+    var output = outputs[index];
+    t.equal(stemmer(input), output, '`' + input + '` == `' + output + '`');
+  });
 
-/*
- * Fixtures.
- */
-
-var inputs,
-    outputs;
-
-inputs = fs.readFileSync('./test/input.txt', 'utf-8').split('\n');
-outputs = fs.readFileSync('./test/output.txt', 'utf-8').split('\n');
-
-/*
- * Tests.
- */
-
-describe('stemmer()', function () {
-    it('should be a `function`', function () {
-        assert(typeof stemmer === 'function');
-    });
+  t.end();
 });
 
-describe('stemming', function () {
-    var index;
+/* CLI. */
+test('cli', function (t) {
+  var input = new PassThrough();
 
-    /**
-     * Assert a stem.
-     *
-     * @param {string} input
-     * @param {string} output
-     */
-    function assertStem(input, output) {
-        it('should stem `' + input + '` to `' + output + '`', function () {
-            assert(stemmer(input) === output);
-        });
-    }
+  t.plan(7);
 
-    index = -1;
+  execa.stdout('./cli.js', ['considerations']).then(function (result) {
+    t.equal(result, 'consider', 'argument');
+  });
 
-    while (inputs[++index]) {
-        assertStem(inputs[index], outputs[index]);
-    }
+  execa.stdout('./cli.js', ['detestable', 'vileness']).then(function (result) {
+    t.equal(result, 'detest vile', 'arguments');
+  });
+
+  execa.stdout('./cli.js', {input: input}).then(function (result) {
+    t.equal(result, 'detest vile', 'stdin');
+  });
+
+  input.write('detestable');
+
+  setImmediate(function () {
+    input.end(' vileness');
+  });
+
+  ['-h', '--help'].forEach(function (flag) {
+    execa.stdout('./cli.js', [flag]).then(function (result) {
+      t.ok(/\s+Usage: stemmer/.test(result), flag);
+    });
+  });
+
+  ['-v', '--version'].forEach(function (flag) {
+    execa.stdout('./cli.js', [flag]).then(function (result) {
+      t.equal(result, version, flag);
+    });
+  });
 });
