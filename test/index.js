@@ -1,14 +1,5 @@
-/**
- * @author Titus Wormer
- * @copyright 2014 Titus Wormer
- * @license MIT
- * @module stemmer
- * @fileoverview Test suite for `stemmer`.
- */
-
 'use strict';
 
-/* Dependencies. */
 var fs = require('fs');
 var path = require('path');
 var PassThrough = require('stream').PassThrough;
@@ -17,11 +8,9 @@ var execa = require('execa');
 var version = require('../package').version;
 var stemmer = require('..');
 
-/* Fixtures. */
 var inputs = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf8').split('\n');
 var outputs = fs.readFileSync(path.join(__dirname, 'output.txt'), 'utf8').split('\n');
 
-/* API. */
 test('api', function (t) {
   inputs.forEach(function (input, index) {
     var output = outputs[index];
@@ -31,7 +20,6 @@ test('api', function (t) {
   t.end();
 });
 
-/* CLI. */
 test('cli', function (t) {
   var input = new PassThrough();
 

@@ -1,14 +1,5 @@
-/**
- * @author Titus Wormer
- * @copyright 2014 Titus Wormer
- * @license MIT
- * @module stemmer
- * @fileoverview Porter Stemmer algorithm.
- */
-
 'use strict';
 
-/* Expose. */
 module.exports = stemmer;
 
 /* Character code for `y`. */
@@ -102,12 +93,7 @@ var STEP_4 = new RegExp(
   'iti|ous|ive|ize)$'
 );
 
-/**
- * Stem `value`.
- *
- * @param {string} value
- * @return {string} - Stem corresponding to `value`.
- */
+/* Stem `value`. */
 function stemmer(value) {
   var firstCharacterWasLowerCaseY;
   var match;

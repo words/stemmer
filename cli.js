@@ -1,22 +1,11 @@
 #!/usr/bin/env node
-/**
- * @author Titus Wormer
- * @copyright 2014 Titus Wormer
- * @license MIT
- * @module stemmer
- * @fileoverview CLI for `stemmer`.
- */
-
 'use strict';
 
-/* Dependencies. */
 var pack = require('./package.json');
 var stemmer = require('./');
 
-/* Arguments. */
 var argv = process.argv.slice(2);
 
-/* Program. */
 if (
   argv.indexOf('--help') !== -1 ||
   argv.indexOf('-h') !== -1
@@ -27,17 +16,16 @@ if (
   argv.indexOf('-v') !== -1
 ) {
   console.log(pack.version);
-} else if (argv.length) {
-  console.log(stem(argv.join(' ')));
-} else {
+} else if (argv.length === 0) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (data) {
     console.log(stem(data));
   });
+} else {
+  console.log(stem(argv.join(' ')));
 }
 
-/* Core. */
 function stem(values) {
   return values.split(/\s+/g).map(stemmer).join(' ');
 }
