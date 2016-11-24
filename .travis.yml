@@ -1,11 +1,9 @@
 language: node_js
 node_js:
-- '0.11'
-- '5.0'
-- '6.0'
+- '4.0'
+- '7.0'
 sudo: false
-after_success:
-- bash <(curl -s https://codecov.io/bash)
+after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
   - provider: npm
     email: tituswormer@gmail.com
@@ -13,7 +11,7 @@ deploy:
       secure: U3D7Tp9sCBj5Ko0/BeUzUnM7omNBGQV6xkEiU+Okd05pa7cU5H2f29WmlsXdZlM4dLC+FTPEhghCOZAMA3CMIdh9mPzhoBTysYJhy10MUsr7+L14GMqU5mIMqT/2bU0Bq59GSUCASQv99utQwvoYJSx0VOhBlTmLLfgD1LGlJiM=
     on:
       tags: true
-      node: '5.0'
+      node: '4.0'
   - provider: releases
     api_key:
       secure: cvJcLIMqMmidHPli3Y1SUtbd3xhJ23fbZIvpRvVSbGlRs1wVi9UvEknNMgFsDJN0XG/iTnDQZ/pAhJjBDayVmRe7yUBMHaaPzKVtYZ8Xqyo7dncdlAoS2GiCf1/QwihG6Qj/blfsK/YbL08pIztrEuhhFzgBv24u7FNPk0UTdV4=
@@ -22,4 +20,4 @@ deploy:
       - "stemmer.min.js"
     on:
       tags: true
-      node: '6.0'
+      node: '7.0'
