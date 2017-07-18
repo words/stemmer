@@ -2,7 +2,7 @@
 
 [Porter stemming algorithm][source].
 
-> **Check out [`stmr.c`][c] for a faster version, in C.**
+> **Check out [`stmr.c`][c-3] and [`stmr`][c-1] for a faster version, in C.**
 
 ## API
 
@@ -17,9 +17,9 @@ Use:
 ```js
 var stemmer = require('stemmer');
 
-stemmer('considerations'); // 'consider'
-stemmer('detestable'); // 'detest'
-stemmer('vileness'); // 'vile'
+stemmer('considerations'); //=> 'consider'
+stemmer('detestable'); //=> 'detest'
+stemmer('vileness'); //=> 'vile'
 ```
 
 ## CLI
@@ -71,6 +71,8 @@ $ echo "detestable vileness" | stemmer
 
 [author]: http://wooorm.com
 
-[c]: https://github.com/wooorm/stmr.c
-
 [source]: http://tartarus.org/martin/PorterStemmer
+
+[c-3]: https://github.com/wooorm/stmr.c
+
+[c-1]: https://github.com/wooorm/stmr
