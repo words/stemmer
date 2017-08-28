@@ -2,8 +2,6 @@
 
 [Porter stemming algorithm][source].
 
-> **Check out [`stmr.c`][c-3] and [`stmr`][c-1] for a faster version, in C.**
-
 ## API
 
 Install:
@@ -55,6 +53,10 @@ $ echo "detestable vileness" | stemmer
 
 ## Related
 
+*   [`stmr.c`](https://github.com/wooorm/stmr.c)
+    — C API
+*   [`stmr`](https://github.com/wooorm/stmr)
+    — C CLI
 *   [`lancaster-stemmer`](https://github.com/wooorm/lancaster-stemmer)
     — Lancaster stemming algorithm
 *   [`double-metaphone`](https://github.com/wooorm/double-metaphone)
@@ -87,7 +89,3 @@ $ echo "detestable vileness" | stemmer
 [author]: http://wooorm.com
 
 [source]: http://tartarus.org/martin/PorterStemmer
-
-[c-3]: https://github.com/wooorm/stmr.c
-
-[c-1]: https://github.com/wooorm/stmr
