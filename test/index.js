@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var assert = require('assert');
 var PassThrough = require('stream').PassThrough;
 var test = require('tape');
 var execa = require('execa');
@@ -12,10 +13,13 @@ var inputs = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf8').split('\
 var outputs = fs.readFileSync(path.join(__dirname, 'output.txt'), 'utf8').split('\n');
 
 test('api', function (t) {
-  inputs.forEach(function (input, index) {
-    var output = outputs[index];
-    t.equal(stemmer(input), output, '`' + input + '` == `' + output + '`');
-  });
+  t.doesNotThrow(function () {
+    var length = inputs.length;
+    var index = -1;
+    while (++index < length) {
+      assert.equal(stemmer(inputs[index]), outputs[index]);
+    }
+  }, 'should work for all fixtures');
 
   t.end();
 });

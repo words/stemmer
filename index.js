@@ -6,7 +6,6 @@ module.exports = stemmer;
 var CC_Y = 'y'.charCodeAt(0);
 
 /* Standard suffix manipulations. */
-
 var step2list = {
   ational: 'ate',
   tional: 'tion',
@@ -42,7 +41,6 @@ var step3list = {
 };
 
 /* Consonant-vowel sequences. */
-
 var consonant = '[^aeiou]';
 var vowel = '[aeiouy]';
 var consonantSequence = '(' + consonant + '[^aeiouy]*)';
@@ -71,7 +69,6 @@ var CONSONANT_LIKE = new RegExp(
 );
 
 /* Exception expressions. */
-
 var SUFFIX_LL = /ll$/;
 var SUFFIX_E = /^(.+?)e$/;
 var SUFFIX_Y = /^(.+?)y$/;
@@ -105,8 +102,7 @@ function stemmer(value) {
     return value;
   }
 
-  /* Detect initial `y`, make sure it never
-   * matches. */
+  /* Detect initial `y`, make sure it never matches. */
   if (value.charCodeAt(0) === CC_Y) {
     firstCharacterWasLowerCaseY = true;
     value = 'Y' + value.substr(1);
@@ -127,18 +123,13 @@ function stemmer(value) {
       /* Remove last character. */
       value = value.substr(0, value.length - 1);
     }
-  } else if (
-    (match = SUFFIX_ED_OR_ING.exec(value)) &&
-    VOWEL_IN_STEM.test(match[1])
-  ) {
+  } else if ((match = SUFFIX_ED_OR_ING.exec(value)) && VOWEL_IN_STEM.test(match[1])) {
     value = match[1];
 
     if (SUFFIX_AT_OR_BL_OR_IZ.test(value)) {
       /* Append `e`. */
       value += 'e';
-    } else if (
-      SUFFIX_MULTI_CONSONANT_LIKE.test(value)
-    ) {
+    } else if (SUFFIX_MULTI_CONSONANT_LIKE.test(value)) {
       /* Remove last character. */
       value = value.substr(0, value.length - 1);
     } else if (CONSONANT_LIKE.test(value)) {
@@ -175,10 +166,7 @@ function stemmer(value) {
   /* Step 5. */
   if (
     (match = SUFFIX_E.exec(value)) &&
-    (
-      MEASURE_GT_1.test(match[1]) ||
-      (MEASURE_EQ_1.test(match[1]) && !CONSONANT_LIKE.test(match[1]))
-    )
+    (MEASURE_GT_1.test(match[1]) || (MEASURE_EQ_1.test(match[1]) && !CONSONANT_LIKE.test(match[1])))
   ) {
     value = match[1];
   }
