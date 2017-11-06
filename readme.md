@@ -76,13 +76,13 @@ $ echo "detestable vileness" | stemmer
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/stemmer.svg
+[travis-badge]: https://img.shields.io/travis/words/stemmer.svg
 
-[travis]: https://travis-ci.org/wooorm/stemmer
+[travis]: https://travis-ci.org/words/stemmer
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/stemmer.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/words/stemmer.svg
 
-[codecov]: https://codecov.io/github/wooorm/stemmer
+[codecov]: https://codecov.io/github/words/stemmer
 
 [license]: LICENSE
 
