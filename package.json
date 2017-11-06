@@ -1,6 +1,6 @@
 {
   "name": "stemmer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Porter Stemmer algorithm",
   "license": "MIT",
   "keywords": [
