@@ -13,6 +13,7 @@ deploy:
       tags: true
       node: '4.0'
   - provider: releases
+    skip_cleanup: true
     api_key:
       secure: cvJcLIMqMmidHPli3Y1SUtbd3xhJ23fbZIvpRvVSbGlRs1wVi9UvEknNMgFsDJN0XG/iTnDQZ/pAhJjBDayVmRe7yUBMHaaPzKVtYZ8Xqyo7dncdlAoS2GiCf1/QwihG6Qj/blfsK/YbL08pIztrEuhhFzgBv24u7FNPk0UTdV4=
     file:
