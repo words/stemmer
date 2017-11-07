@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - '4.0'
-- '8.0'
+- '9.0'
 sudo: false
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
@@ -11,7 +11,7 @@ deploy:
       secure: U3D7Tp9sCBj5Ko0/BeUzUnM7omNBGQV6xkEiU+Okd05pa7cU5H2f29WmlsXdZlM4dLC+FTPEhghCOZAMA3CMIdh9mPzhoBTysYJhy10MUsr7+L14GMqU5mIMqT/2bU0Bq59GSUCASQv99utQwvoYJSx0VOhBlTmLLfgD1LGlJiM=
     on:
       tags: true
-      node: '4.0'
+      node: '9.0'
   - provider: releases
     skip_cleanup: true
     api_key:
@@ -21,4 +21,4 @@ deploy:
       - "stemmer.min.js"
     on:
       tags: true
-      node: '8.0'
+      node: '9.0'
