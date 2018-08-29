@@ -5,20 +5,13 @@ node_js:
 sudo: false
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
-  - provider: npm
-    email: tituswormer@gmail.com
-    api_key:
-      secure: U3D7Tp9sCBj5Ko0/BeUzUnM7omNBGQV6xkEiU+Okd05pa7cU5H2f29WmlsXdZlM4dLC+FTPEhghCOZAMA3CMIdh9mPzhoBTysYJhy10MUsr7+L14GMqU5mIMqT/2bU0Bq59GSUCASQv99utQwvoYJSx0VOhBlTmLLfgD1LGlJiM=
-    on:
-      tags: true
-      node: '9.0'
-  - provider: releases
-    skip_cleanup: true
-    api_key:
-      secure: cvJcLIMqMmidHPli3Y1SUtbd3xhJ23fbZIvpRvVSbGlRs1wVi9UvEknNMgFsDJN0XG/iTnDQZ/pAhJjBDayVmRe7yUBMHaaPzKVtYZ8Xqyo7dncdlAoS2GiCf1/QwihG6Qj/blfsK/YbL08pIztrEuhhFzgBv24u7FNPk0UTdV4=
-    file:
-      - "stemmer.js"
-      - "stemmer.min.js"
-    on:
-      tags: true
-      node: '9.0'
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: cvJcLIMqMmidHPli3Y1SUtbd3xhJ23fbZIvpRvVSbGlRs1wVi9UvEknNMgFsDJN0XG/iTnDQZ/pAhJjBDayVmRe7yUBMHaaPzKVtYZ8Xqyo7dncdlAoS2GiCf1/QwihG6Qj/blfsK/YbL08pIztrEuhhFzgBv24u7FNPk0UTdV4=
+  file:
+    - "stemmer.js"
+    - "stemmer.min.js"
+  on:
+    tags: true
+    node: '9.0'
