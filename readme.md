@@ -13,11 +13,11 @@ npm install stemmer
 Use:
 
 ```js
-var stemmer = require('stemmer');
+var stemmer = require('stemmer')
 
-stemmer('considerations'); //=> 'consider'
-stemmer('detestable'); //=> 'detest'
-stemmer('vileness'); //=> 'vile'
+stemmer('considerations') // => 'consider'
+stemmer('detestable') // => 'detest'
+stemmer('vileness') // => 'vile'
 ```
 
 ## CLI
