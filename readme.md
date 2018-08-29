@@ -84,7 +84,7 @@ $ echo "detestable vileness" | stemmer
 
 [codecov]: https://codecov.io/github/words/stemmer
 
-[license]: LICENSE
+[license]: license
 
 [author]: http://wooorm.com
 
