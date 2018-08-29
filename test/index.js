@@ -17,7 +17,7 @@ test('api', function (t) {
     var length = inputs.length;
     var index = -1;
     while (++index < length) {
-      assert.equal(stemmer(inputs[index]), outputs[index]);
+      assert.strictEqual(stemmer(inputs[index]), outputs[index]);
     }
   }, 'should work for all fixtures');
 

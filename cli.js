@@ -2,7 +2,7 @@
 'use strict';
 
 var pack = require('./package.json');
-var stemmer = require('./');
+var stemmer = require('.');
 
 var argv = process.argv.slice(2);
 
