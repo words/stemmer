@@ -33,12 +33,13 @@
     "remark-cli": "^5.0.0",
     "remark-preset-wooorm": "^4.0.0",
     "tape": "^4.4.0",
+    "tinyify": "^2.4.3",
     "xo": "^0.22.0"
   },
   "scripts": {
     "build-md": "remark . -qfo",
-    "build-bundle": "browserify index.js -s stemmer > stemmer.js",
-    "build-mangle": "esmangle stemmer.js > stemmer.min.js",
+    "build-bundle": "browserify . -s stemmer > stemmer.js",
+    "build-mangle": "browserify . -s stemmer -p tinyify > stemmer.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
     "test-api": "node test",
