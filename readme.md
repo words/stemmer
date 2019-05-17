@@ -7,15 +7,15 @@
 
 [Porter stemming algorithm][source].
 
-## API
+## Install
 
-Install:
+[npm][]:
 
 ```bash
 npm install stemmer
 ```
 
-Use:
+## API
 
 ```js
 var stemmer = require('stemmer')
@@ -26,14 +26,6 @@ stemmer('vileness') // => 'vile'
 ```
 
 ## CLI
-
-Install:
-
-```sh
-npm install -g stemmer
-```
-
-Use:
 
 ```txt
 Usage: stemmer [options] <words...>
@@ -102,3 +94,5 @@ $ echo "detestable vileness" | stemmer
 [author]: https://wooorm.com
 
 [source]: https://tartarus.org/martin/PorterStemmer
+
+[npm]: https://www.npmjs.com
