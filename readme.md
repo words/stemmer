@@ -1,4 +1,9 @@
-# stemmer [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# stemmer
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 [Porter stemming algorithm][source].
 
@@ -76,13 +81,21 @@ $ echo "detestable vileness" | stemmer
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/words/stemmer.svg
+[build-badge]: https://img.shields.io/travis/words/stemmer.svg
 
-[travis]: https://travis-ci.org/words/stemmer
+[build]: https://travis-ci.org/words/stemmer
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/words/stemmer.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/words/stemmer.svg
 
-[codecov]: https://codecov.io/github/words/stemmer
+[coverage]: https://codecov.io/github/words/stemmer
+
+[downloads-badge]: https://img.shields.io/npm/dm/stemmer.svg
+
+[downloads]: https://www.npmjs.com/package/stemmer
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/stemmer.svg
+
+[size]: https://bundlephobia.com/result?p=stemmer
 
 [license]: license
 
