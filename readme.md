@@ -86,6 +86,6 @@ $ echo "detestable vileness" | stemmer
 
 [license]: license
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
-[source]: http://tartarus.org/martin/PorterStemmer
+[source]: https://tartarus.org/martin/PorterStemmer
