@@ -71,6 +71,7 @@ var step4 = new RegExp(
 )
 
 // Stem `value`.
+// eslint-disable-next-line complexity
 function stemmer(value) {
   var firstCharacterWasLowerCaseY
   var match

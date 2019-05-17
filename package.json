@@ -63,10 +63,6 @@
   "xo": {
     "prettier": true,
     "esnext": false,
-    "rules": {
-      "no-cond-assign": "off",
-      "complexity": "off"
-    },
     "ignores": [
       "stemmer.js"
     ]
