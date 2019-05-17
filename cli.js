@@ -27,7 +27,6 @@ function stem(values) {
     .join(' ')
 }
 
-/* Help. */
 function help() {
   return (
     [

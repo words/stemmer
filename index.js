@@ -83,7 +83,9 @@ function stemmer(value) {
   }
 
   // Detect initial `y`, make sure it never matches.
-  if (value.charCodeAt(0) === 121 /* y */) {
+  if (
+    value.charCodeAt(0) === 121 // Lowercase Y
+  ) {
     firstCharacterWasLowerCaseY = true
     value = 'Y' + value.substr(1)
   }
