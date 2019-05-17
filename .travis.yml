@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- lts/boron
-- node
+  - lts/dubnium
+  - node
 sudo: false
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
@@ -10,7 +10,7 @@ deploy:
   api_key:
     secure: cvJcLIMqMmidHPli3Y1SUtbd3xhJ23fbZIvpRvVSbGlRs1wVi9UvEknNMgFsDJN0XG/iTnDQZ/pAhJjBDayVmRe7yUBMHaaPzKVtYZ8Xqyo7dncdlAoS2GiCf1/QwihG6Qj/blfsK/YbL08pIztrEuhhFzgBv24u7FNPk0UTdV4=
   file:
-    - "stemmer.js"
-    - "stemmer.min.js"
+    - 'stemmer.js'
+    - 'stemmer.min.js'
   on:
     tags: true
