@@ -2,7 +2,7 @@ language: node_js
 node_js: node
 deploy:
   provider: pages
-  local_dir: static
+  local_dir: dest
   target_branch: gh-pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
