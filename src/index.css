@@ -1,0 +1,9 @@
+body {
+  font-family: system-ui;
+  margin: 3em auto;
+  max-width: 30em;
+}
+
+output {
+  font-weight: bold;
+}
