@@ -1,9 +1,34 @@
+:root {
+  color-scheme: light dark;
+  background-color: hsl(0, 0%, 90%);
+}
+
+a {
+  color: #0367d8;
+}
+
 body {
   font-family: system-ui;
   margin: 3em auto;
   max-width: 30em;
 }
 
+label {
+  display: block;
+  margin: calc(0.5 * 1em + 1ex) 0;
+}
+
+input {
+  font: inherit;
+}
+
 output {
   font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: hsl(214, 13%, 10%);
+    color: hsl(214, 13%, 90%);
+  }
 }
