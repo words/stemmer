@@ -62,13 +62,9 @@ var sfxEED = /^(.+?)eed$/
 var sfxS = /^.+?[^s]s$/
 var sfxSsesOrIes = /^.+?(ss|i)es$/
 var sfxMultiConsonantLike = /([^aeiouylsz])\1$/
-var step2 = new RegExp(
-  '^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$'
-)
+var step2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/
 var step3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/
-var step4 = new RegExp(
-  '^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$'
-)
+var step4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/
 
 // Stem `value`.
 // eslint-disable-next-line complexity
@@ -88,23 +84,23 @@ function stemmer(value) {
     value.charCodeAt(0) === 121 // Lowercase Y
   ) {
     firstCharacterWasLowerCaseY = true
-    value = 'Y' + value.substr(1)
+    value = 'Y' + value.slice(1)
   }
 
   // Step 1a.
   if (sfxSsesOrIes.test(value)) {
     // Remove last two characters.
-    value = value.substr(0, value.length - 2)
+    value = value.slice(0, value.length - 2)
   } else if (sfxS.test(value)) {
     // Remove last character.
-    value = value.substr(0, value.length - 1)
+    value = value.slice(0, value.length - 1)
   }
 
   // Step 1b.
   if ((match = sfxEED.exec(value))) {
     if (gt0.test(match[1])) {
       // Remove last character.
-      value = value.substr(0, value.length - 1)
+      value = value.slice(0, value.length - 1)
     }
   } else if ((match = sfxEdOrIng.exec(value)) && vowelInStem.test(match[1])) {
     value = match[1]
@@ -114,7 +110,7 @@ function stemmer(value) {
       value += 'e'
     } else if (sfxMultiConsonantLike.test(value)) {
       // Remove last character.
-      value = value.substr(0, value.length - 1)
+      value = value.slice(0, value.length - 1)
     } else if (consonantLike.test(value)) {
       // Append `e`.
       value += 'e'
@@ -156,12 +152,12 @@ function stemmer(value) {
   }
 
   if (sfxLl.test(value) && gt1.test(value)) {
-    value = value.substr(0, value.length - 1)
+    value = value.slice(0, value.length - 1)
   }
 
   // Turn initial `Y` back to `y`.
   if (firstCharacterWasLowerCaseY) {
-    value = 'y' + value.substr(1)
+    value = 'y' + value.slice(1)
   }
 
   return value
