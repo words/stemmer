@@ -11,7 +11,7 @@
 
 [npm][]:
 
-```bash
+```sh
 npm install stemmer
 ```
 
