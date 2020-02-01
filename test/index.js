@@ -3,10 +3,10 @@
 var fs = require('fs')
 var path = require('path')
 var assert = require('assert')
+var exec = require('child_process').exec
 var PassThrough = require('stream').PassThrough
 var test = require('tape')
-var execa = require('execa')
-var pack = require('../package')
+var version = require('../package').version
 var stemmer = require('..')
 
 var read = fs.readFileSync
@@ -28,38 +28,42 @@ test('api', function(t) {
 
 test('cli', function(t) {
   var input = new PassThrough()
-  var help = ['-h', '--help']
-  var version = ['-v', '--version']
+  var helps = ['-h', '--help']
+  var versions = ['-v', '--version']
 
   t.plan(7)
 
-  execa.stdout('./cli.js', ['considerations']).then(function(result) {
-    t.equal(result, 'consider', 'argument')
+  exec('./cli.js considerations', function(err, stdout, stderr) {
+    t.deepEqual([err, stdout, stderr], [null, 'consider\n', ''], 'one')
   })
 
-  execa.stdout('./cli.js', ['detestable', 'vileness']).then(function(result) {
-    t.equal(result, 'detest vile', 'arguments')
+  exec('./cli.js detestable vileness', function(err, stdout, stderr) {
+    t.deepEqual([err, stdout, stderr], [null, 'detest vile\n', ''], 'two')
   })
 
-  execa.stdout('./cli.js', {input: input}).then(function(result) {
-    t.equal(result, 'detest vile', 'stdin')
+  var subprocess = exec('./cli.js', function(err, stdout, stderr) {
+    t.deepEqual([err, stdout, stderr], [null, 'detest vile\n', ''], 'stdin')
   })
 
+  input.pipe(subprocess.stdin)
   input.write('detestable')
-
   setImmediate(function() {
     input.end(' vileness')
   })
 
-  help.forEach(function(flag) {
-    execa.stdout('./cli.js', [flag]).then(function(result) {
-      t.ok(/\s+Usage: stemmer/.test(result), flag)
+  helps.forEach(function(flag) {
+    exec('./cli.js ' + flag, function(err, stdout, stderr) {
+      t.deepEqual(
+        [err, /\sUsage: stemmer/.test(stdout), stderr],
+        [null, true, ''],
+        flag
+      )
     })
   })
 
-  version.forEach(function(flag) {
-    execa.stdout('./cli.js', [flag]).then(function(result) {
-      t.equal(result, pack.version, flag)
+  versions.forEach(function(flag) {
+    exec('./cli.js ' + flag, function(err, stdout, stderr) {
+      t.deepEqual([err, stdout, stderr], [null, version + '\n', ''], flag)
     })
   })
 })
