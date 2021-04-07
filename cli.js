@@ -13,7 +13,7 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 } else if (argv.length === 0) {
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
-  process.stdin.on('data', function(data) {
+  process.stdin.on('data', function (data) {
     console.log(stem(data))
   })
 } else {
@@ -23,7 +23,7 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 function stem(values) {
   return values
     .split(/\s+/g)
-    .map(stemmer)
+    .map((d) => stemmer(d))
     .join(' ')
 }
 

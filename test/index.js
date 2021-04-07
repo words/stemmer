@@ -14,8 +14,8 @@ var read = fs.readFileSync
 var inputs = read(path.join('test', 'input.txt'), 'utf8').split('\n')
 var outputs = read(path.join(__dirname, 'output.txt'), 'utf8').split('\n')
 
-test('api', function(t) {
-  t.doesNotThrow(function() {
+test('api', function (t) {
+  t.doesNotThrow(function () {
     var length = inputs.length
     var index = -1
     while (++index < length) {
@@ -26,44 +26,54 @@ test('api', function(t) {
   t.end()
 })
 
-test('cli', function(t) {
+test('cli', function (t) {
   var input = new PassThrough()
-  var helps = ['-h', '--help']
-  var versions = ['-v', '--version']
 
   t.plan(7)
 
-  exec('./cli.js considerations', function(err, stdout, stderr) {
-    t.deepEqual([err, stdout, stderr], [null, 'consider\n', ''], 'one')
+  exec('./cli.js considerations', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, 'consider\n', ''], 'one')
   })
 
-  exec('./cli.js detestable vileness', function(err, stdout, stderr) {
-    t.deepEqual([err, stdout, stderr], [null, 'detest vile\n', ''], 'two')
+  exec('./cli.js detestable vileness', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'two')
   })
 
-  var subprocess = exec('./cli.js', function(err, stdout, stderr) {
-    t.deepEqual([err, stdout, stderr], [null, 'detest vile\n', ''], 'stdin')
+  var subprocess = exec('./cli.js', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'stdin')
   })
 
   input.pipe(subprocess.stdin)
   input.write('detestable')
-  setImmediate(function() {
+  setImmediate(function () {
     input.end(' vileness')
   })
 
-  helps.forEach(function(flag) {
-    exec('./cli.js ' + flag, function(err, stdout, stderr) {
-      t.deepEqual(
-        [err, /\sUsage: stemmer/.test(stdout), stderr],
-        [null, true, ''],
-        flag
-      )
-    })
+  exec('./cli.js -h', function (error, stdout, stderr) {
+    t.deepEqual(
+      [error, /\sUsage: stemmer/.test(stdout), stderr],
+      [null, true, ''],
+      '-h'
+    )
   })
 
-  versions.forEach(function(flag) {
-    exec('./cli.js ' + flag, function(err, stdout, stderr) {
-      t.deepEqual([err, stdout, stderr], [null, version + '\n', ''], flag)
-    })
+  exec('./cli.js --help', function (error, stdout, stderr) {
+    t.deepEqual(
+      [error, /\sUsage: stemmer/.test(stdout), stderr],
+      [null, true, ''],
+      '--help'
+    )
+  })
+
+  exec('./cli.js -v', function (error, stdout, stderr) {
+    t.deepEqual([error, stdout, stderr], [null, version + '\n', ''], '-v')
+  })
+
+  exec('./cli.js --version', function (error, stdout, stderr) {
+    t.deepEqual(
+      [error, stdout, stderr],
+      [null, version + '\n', ''],
+      '--version'
+    )
   })
 })
