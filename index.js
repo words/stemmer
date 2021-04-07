@@ -62,10 +62,16 @@ var step2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|izati
 var step3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/
 var step4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/
 
-// Stem `value`.
-// eslint-disable-next-line complexity
+/**
+ * Stem `value`.
+ *
+ * @param {string} value
+ * @returns {string}
+ */
 export function stemmer(value) {
+  /** @type {boolean} */
   var firstCharacterWasLowerCaseY
+  /** @type {RegExpMatchArray} */
   var match
 
   value = String(value).toLowerCase()

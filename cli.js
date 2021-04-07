@@ -3,6 +3,7 @@ import fs from 'fs'
 import {URL} from 'url'
 import {stemmer} from './index.js'
 
+/** @type {Object.<string, unknown>} */
 var pack = JSON.parse(
   String(fs.readFileSync(new URL('./package.json', import.meta.url)))
 )
@@ -17,12 +18,16 @@ if (argv.includes('--help') || argv.includes('-h')) {
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
   process.stdin.on('data', function (data) {
-    console.log(stem(data))
+    console.log(stem(String(data)))
   })
 } else {
   console.log(stem(argv.join(' ')))
 }
 
+/**
+ * @param {string} values
+ * @returns {string}
+ */
 function stem(values) {
   return values
     .split(/\s+/g)
