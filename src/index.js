@@ -1,11 +1,9 @@
-'use strict'
-
 /* eslint-env browser */
 
-var stemmer = require('stemmer')
+import {stemmer} from 'stemmer'
 
-var $input = document.querySelector('input')
-var $output = document.querySelector('output')
+const $input = document.querySelector('input')
+const $output = document.querySelector('output')
 
 $input.addEventListener('input', oninputchange)
 
