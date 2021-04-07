@@ -1,18 +1,20 @@
-'use strict'
+import assert from 'assert'
+import {exec} from 'child_process'
+import fs from 'fs'
+import path from 'path'
+import {PassThrough} from 'stream'
+import {URL} from 'url'
+import {stemmer} from '../index.js'
+import test from 'tape'
 
-var fs = require('fs')
-var path = require('path')
-var assert = require('assert')
-var exec = require('child_process').exec
-var PassThrough = require('stream').PassThrough
-var test = require('tape')
-var version = require('../package').version
-var stemmer = require('..')
+var pack = JSON.parse(
+  String(fs.readFileSync(new URL('../package.json', import.meta.url)))
+)
 
-var read = fs.readFileSync
-
-var inputs = read(path.join('test', 'input.txt'), 'utf8').split('\n')
-var outputs = read(path.join(__dirname, 'output.txt'), 'utf8').split('\n')
+var inputs = fs.readFileSync(path.join('test', 'input.txt'), 'utf8').split('\n')
+var outputs = fs
+  .readFileSync(path.join('test', 'output.txt'), 'utf8')
+  .split('\n')
 
 test('api', function (t) {
   t.doesNotThrow(function () {
@@ -66,13 +68,13 @@ test('cli', function (t) {
   })
 
   exec('./cli.js -v', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, version + '\n', ''], '-v')
+    t.deepEqual([error, stdout, stderr], [null, pack.version + '\n', ''], '-v')
   })
 
   exec('./cli.js --version', function (error, stdout, stderr) {
     t.deepEqual(
       [error, stdout, stderr],
-      [null, version + '\n', ''],
+      [null, pack.version + '\n', ''],
       '--version'
     )
   })

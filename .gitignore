@@ -1,8 +1,5 @@
 .DS_Store
 *.log
-.nyc_output/
 coverage/
 node_modules/
-stemmer.js
-stemmer.min.js
 yarn.lock

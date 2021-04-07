@@ -1,7 +1,3 @@
-'use strict'
-
-module.exports = stemmer
-
 // Standard suffix manipulations.
 var step2list = {
   ational: 'ate',
@@ -68,7 +64,7 @@ var step4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|i
 
 // Stem `value`.
 // eslint-disable-next-line complexity
-function stemmer(value) {
+export function stemmer(value) {
   var firstCharacterWasLowerCaseY
   var match
 
