@@ -58,9 +58,11 @@ var sfxEED = /^(.+?)eed$/
 var sfxS = /^.+?[^s]s$/
 var sfxSsesOrIes = /^.+?(ss|i)es$/
 var sfxMultiConsonantLike = /([^aeiouylsz])\1$/
-var step2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/
+var step2 =
+  /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/
 var step3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/
-var step4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/
+var step4 =
+  /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/
 
 /**
  * Stem `value`.
@@ -83,7 +85,7 @@ export function stemmer(value) {
 
   // Detect initial `y`, make sure it never matches.
   if (
-    value.charCodeAt(0) === 121 // Lowercase Y
+    value.codePointAt(0) === 121 // Lowercase Y
   ) {
     firstCharacterWasLowerCaseY = true
     value = 'Y' + value.slice(1)

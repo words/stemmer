@@ -1,11 +1,11 @@
-import assert from 'assert'
-import {exec} from 'child_process'
-import fs from 'fs'
-import path from 'path'
-import {PassThrough} from 'stream'
-import {URL} from 'url'
-import {stemmer} from '../index.js'
+import assert from 'node:assert'
+import {exec} from 'node:child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import {PassThrough} from 'node:stream'
+import {URL} from 'node:url'
 import test from 'tape'
+import {stemmer} from '../index.js'
 
 /** @type {Object.<string, unknown>} */
 var pack = JSON.parse(

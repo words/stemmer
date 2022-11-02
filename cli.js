@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-import fs from 'fs'
-import {URL} from 'url'
+import fs from 'node:fs'
+import {URL} from 'node:url'
+import process from 'node:process'
 import {stemmer} from './index.js'
 
 /** @type {Object.<string, unknown>} */
 var pack = JSON.parse(
-  String(fs.readFileSync(new URL('./package.json', import.meta.url)))
+  String(fs.readFileSync(new URL('package.json', import.meta.url)))
 )
 
 var argv = process.argv.slice(2)
