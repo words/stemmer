@@ -1,5 +1,5 @@
 // Standard suffix manipulations.
-var step2list = {
+const step2list = {
   ational: 'ate',
   tional: 'tion',
   enci: 'ence',
@@ -23,7 +23,7 @@ var step2list = {
   logi: 'log'
 }
 
-var step3list = {
+const step3list = {
   icate: 'ic',
   ative: '',
   alize: 'al',
@@ -34,34 +34,34 @@ var step3list = {
 }
 
 // Consonant-vowel sequences.
-var consonant = '[^aeiou]'
-var vowel = '[aeiouy]'
-var consonants = '(' + consonant + '[^aeiouy]*)'
-var vowels = '(' + vowel + '[aeiou]*)'
+const consonant = '[^aeiou]'
+const vowel = '[aeiouy]'
+const consonants = '(' + consonant + '[^aeiouy]*)'
+const vowels = '(' + vowel + '[aeiou]*)'
 
-var gt0 = new RegExp('^' + consonants + '?' + vowels + consonants)
-var eq1 = new RegExp(
+const gt0 = new RegExp('^' + consonants + '?' + vowels + consonants)
+const eq1 = new RegExp(
   '^' + consonants + '?' + vowels + consonants + vowels + '?$'
 )
-var gt1 = new RegExp('^' + consonants + '?(' + vowels + consonants + '){2,}')
-var vowelInStem = new RegExp('^' + consonants + '?' + vowel)
-var consonantLike = new RegExp('^' + consonants + vowel + '[^aeiouwxy]$')
+const gt1 = new RegExp('^' + consonants + '?(' + vowels + consonants + '){2,}')
+const vowelInStem = new RegExp('^' + consonants + '?' + vowel)
+const consonantLike = new RegExp('^' + consonants + vowel + '[^aeiouwxy]$')
 
 // Exception expressions.
-var sfxLl = /ll$/
-var sfxE = /^(.+?)e$/
-var sfxY = /^(.+?)y$/
-var sfxIon = /^(.+?(s|t))(ion)$/
-var sfxEdOrIng = /^(.+?)(ed|ing)$/
-var sfxAtOrBlOrIz = /(at|bl|iz)$/
-var sfxEED = /^(.+?)eed$/
-var sfxS = /^.+?[^s]s$/
-var sfxSsesOrIes = /^.+?(ss|i)es$/
-var sfxMultiConsonantLike = /([^aeiouylsz])\1$/
-var step2 =
+const sfxLl = /ll$/
+const sfxE = /^(.+?)e$/
+const sfxY = /^(.+?)y$/
+const sfxIon = /^(.+?(s|t))(ion)$/
+const sfxEdOrIng = /^(.+?)(ed|ing)$/
+const sfxAtOrBlOrIz = /(at|bl|iz)$/
+const sfxEED = /^(.+?)eed$/
+const sfxS = /^.+?[^s]s$/
+const sfxSsesOrIes = /^.+?(ss|i)es$/
+const sfxMultiConsonantLike = /([^aeiouylsz])\1$/
+const step2 =
   /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/
-var step3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/
-var step4 =
+const step3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/
+const step4 =
   /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/
 
 /**
@@ -70,99 +70,101 @@ var step4 =
  * @param {string} value
  * @returns {string}
  */
+// eslint-disable-next-line complexity
 export function stemmer(value) {
-  /** @type {boolean} */
-  var firstCharacterWasLowerCaseY
-  /** @type {RegExpMatchArray} */
-  var match
-
-  value = String(value).toLowerCase()
+  let result = String(value).toLowerCase()
 
   // Exit early.
-  if (value.length < 3) {
-    return value
+  if (result.length < 3) {
+    return result
   }
+
+  /** @type {boolean} */
+  let firstCharacterWasLowerCaseY
 
   // Detect initial `y`, make sure it never matches.
   if (
-    value.codePointAt(0) === 121 // Lowercase Y
+    result.codePointAt(0) === 121 // Lowercase Y
   ) {
     firstCharacterWasLowerCaseY = true
-    value = 'Y' + value.slice(1)
+    result = 'Y' + result.slice(1)
   }
 
   // Step 1a.
-  if (sfxSsesOrIes.test(value)) {
+  if (sfxSsesOrIes.test(result)) {
     // Remove last two characters.
-    value = value.slice(0, -2)
-  } else if (sfxS.test(value)) {
+    result = result.slice(0, -2)
+  } else if (sfxS.test(result)) {
     // Remove last character.
-    value = value.slice(0, -1)
+    result = result.slice(0, -1)
   }
 
+  /** @type {RegExpMatchArray} */
+  let match
+
   // Step 1b.
-  if ((match = sfxEED.exec(value))) {
+  if ((match = sfxEED.exec(result))) {
     if (gt0.test(match[1])) {
       // Remove last character.
-      value = value.slice(0, -1)
+      result = result.slice(0, -1)
     }
-  } else if ((match = sfxEdOrIng.exec(value)) && vowelInStem.test(match[1])) {
-    value = match[1]
+  } else if ((match = sfxEdOrIng.exec(result)) && vowelInStem.test(match[1])) {
+    result = match[1]
 
-    if (sfxAtOrBlOrIz.test(value)) {
+    if (sfxAtOrBlOrIz.test(result)) {
       // Append `e`.
-      value += 'e'
-    } else if (sfxMultiConsonantLike.test(value)) {
+      result += 'e'
+    } else if (sfxMultiConsonantLike.test(result)) {
       // Remove last character.
-      value = value.slice(0, -1)
-    } else if (consonantLike.test(value)) {
+      result = result.slice(0, -1)
+    } else if (consonantLike.test(result)) {
       // Append `e`.
-      value += 'e'
+      result += 'e'
     }
   }
 
   // Step 1c.
-  if ((match = sfxY.exec(value)) && vowelInStem.test(match[1])) {
+  if ((match = sfxY.exec(result)) && vowelInStem.test(match[1])) {
     // Remove suffixing `y` and append `i`.
-    value = match[1] + 'i'
+    result = match[1] + 'i'
   }
 
   // Step 2.
-  if ((match = step2.exec(value)) && gt0.test(match[1])) {
-    value = match[1] + step2list[match[2]]
+  if ((match = step2.exec(result)) && gt0.test(match[1])) {
+    result = match[1] + step2list[match[2]]
   }
 
   // Step 3.
-  if ((match = step3.exec(value)) && gt0.test(match[1])) {
-    value = match[1] + step3list[match[2]]
+  if ((match = step3.exec(result)) && gt0.test(match[1])) {
+    result = match[1] + step3list[match[2]]
   }
 
   // Step 4.
-  if ((match = step4.exec(value))) {
+  if ((match = step4.exec(result))) {
     if (gt1.test(match[1])) {
-      value = match[1]
+      result = match[1]
     }
-  } else if ((match = sfxIon.exec(value)) && gt1.test(match[1])) {
-    value = match[1]
+  } else if ((match = sfxIon.exec(result)) && gt1.test(match[1])) {
+    result = match[1]
   }
 
   // Step 5.
   if (
-    (match = sfxE.exec(value)) &&
+    (match = sfxE.exec(result)) &&
     (gt1.test(match[1]) ||
       (eq1.test(match[1]) && !consonantLike.test(match[1])))
   ) {
-    value = match[1]
+    result = match[1]
   }
 
-  if (sfxLl.test(value) && gt1.test(value)) {
-    value = value.slice(0, -1)
+  if (sfxLl.test(result) && gt1.test(result)) {
+    result = result.slice(0, -1)
   }
 
   // Turn initial `Y` back to `y`.
   if (firstCharacterWasLowerCaseY) {
-    value = 'y' + value.slice(1)
+    result = 'y' + result.slice(1)
   }
 
-  return value
+  return result
 }

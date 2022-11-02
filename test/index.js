@@ -8,19 +8,21 @@ import test from 'tape'
 import {stemmer} from '../index.js'
 
 /** @type {Object.<string, unknown>} */
-var pack = JSON.parse(
+const pack = JSON.parse(
   String(fs.readFileSync(new URL('../package.json', import.meta.url)))
 )
 
-var inputs = fs.readFileSync(path.join('test', 'input.txt'), 'utf8').split('\n')
-var outputs = fs
+const inputs = fs
+  .readFileSync(path.join('test', 'input.txt'), 'utf8')
+  .split('\n')
+const outputs = fs
   .readFileSync(path.join('test', 'output.txt'), 'utf8')
   .split('\n')
 
 test('api', function (t) {
   t.doesNotThrow(function () {
-    var length = inputs.length
-    var index = -1
+    const length = inputs.length
+    let index = -1
     while (++index < length) {
       assert.strictEqual(stemmer(inputs[index]), outputs[index])
     }
@@ -30,7 +32,7 @@ test('api', function (t) {
 })
 
 test('cli', function (t) {
-  var input = new PassThrough()
+  const input = new PassThrough()
 
   t.plan(7)
 
@@ -42,7 +44,7 @@ test('cli', function (t) {
     t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'two')
   })
 
-  var subprocess = exec('./cli.js', function (error, stdout, stderr) {
+  const subprocess = exec('./cli.js', function (error, stdout, stderr) {
     t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'stdin')
   })
 
