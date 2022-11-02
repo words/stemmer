@@ -1,11 +1,14 @@
 import assert from 'node:assert'
-import {exec} from 'node:child_process'
+import cp from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import {PassThrough} from 'node:stream'
+import util from 'node:util'
 import {URL} from 'node:url'
-import test from 'tape'
+import test from 'node:test'
 import {stemmer} from '../index.js'
+
+const exec = util.promisify(cp.exec)
 
 /** @type {Record<string, unknown>} */
 const pack = JSON.parse(
@@ -19,67 +22,62 @@ const outputs = fs
   .readFileSync(path.join('test', 'output.txt'), 'utf8')
   .split('\n')
 
-test('api', function (t) {
-  t.doesNotThrow(function () {
+test('api', function () {
+  assert.doesNotThrow(function () {
     const length = inputs.length
     let index = -1
     while (++index < length) {
       assert.strictEqual(stemmer(inputs[index]), outputs[index])
     }
   }, 'should work for all fixtures')
-
-  t.end()
 })
 
-test('cli', function (t) {
-  const input = new PassThrough()
+test('cli', async function () {
+  assert.deepEqual(
+    await exec('./cli.js considerations'),
+    {stdout: 'consider\n', stderr: ''},
+    'one'
+  )
 
-  t.plan(7)
+  assert.deepEqual(
+    await exec('./cli.js detestable vileness'),
+    {stdout: 'detest vile\n', stderr: ''},
+    'two'
+  )
 
-  exec('./cli.js considerations', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, 'consider\n', ''], 'one')
+  await new Promise(function (resolve) {
+    const input = new PassThrough()
+    const subprocess = cp.exec('./cli.js', function (error, stdout, stderr) {
+      assert.deepEqual(
+        [error, stdout, stderr],
+        [null, 'detest vile\n', ''],
+        'stdin'
+      )
+    })
+    assert(subprocess.stdin, 'expected stdin on `subprocess`')
+    input.pipe(subprocess.stdin)
+    input.write('detestable')
+    setImmediate(function () {
+      input.end(' vileness')
+      setImmediate(resolve)
+    })
   })
 
-  exec('./cli.js detestable vileness', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'two')
-  })
+  const h = await exec('./cli.js -h')
+  assert.ok(/\sUsage: stemmer/.test(h.stdout), '-h')
 
-  const subprocess = exec('./cli.js', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'stdin')
-  })
+  const help = await exec('./cli.js --help')
+  assert.ok(/\sUsage: stemmer/.test(help.stdout), '-h')
 
-  assert(subprocess.stdin, 'expected `stdin` on child process')
-  input.pipe(subprocess.stdin)
-  input.write('detestable')
-  setImmediate(function () {
-    input.end(' vileness')
-  })
+  assert.deepEqual(
+    await exec('./cli.js -v'),
+    {stdout: pack.version + '\n', stderr: ''},
+    '-v'
+  )
 
-  exec('./cli.js -h', function (error, stdout, stderr) {
-    t.deepEqual(
-      [error, /\sUsage: stemmer/.test(stdout), stderr],
-      [null, true, ''],
-      '-h'
-    )
-  })
-
-  exec('./cli.js --help', function (error, stdout, stderr) {
-    t.deepEqual(
-      [error, /\sUsage: stemmer/.test(stdout), stderr],
-      [null, true, ''],
-      '--help'
-    )
-  })
-
-  exec('./cli.js -v', function (error, stdout, stderr) {
-    t.deepEqual([error, stdout, stderr], [null, pack.version + '\n', ''], '-v')
-  })
-
-  exec('./cli.js --version', function (error, stdout, stderr) {
-    t.deepEqual(
-      [error, stdout, stderr],
-      [null, pack.version + '\n', ''],
-      '--version'
-    )
-  })
+  assert.deepEqual(
+    await exec('./cli.js --version'),
+    {stdout: pack.version + '\n', stderr: ''},
+    '--version'
+  )
 })
