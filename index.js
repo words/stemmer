@@ -67,10 +67,12 @@ const step4 =
   /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/
 
 /**
- * Stem `value`.
+ * Get the stem from a given value.
  *
  * @param {string} value
+ *   Value to stem.
  * @returns {string}
+ *   Stem for `value`
  */
 // eslint-disable-next-line complexity
 export function stemmer(value) {
