@@ -1,4 +1,5 @@
 // Standard suffix manipulations.
+/** @type {Record<string, string>} */
 const step2list = {
   ational: 'ate',
   tional: 'tion',
@@ -23,6 +24,7 @@ const step2list = {
   logi: 'log'
 }
 
+/** @type {Record<string, string>} */
 const step3list = {
   icate: 'ic',
   ative: '',
@@ -80,7 +82,7 @@ export function stemmer(value) {
   }
 
   /** @type {boolean} */
-  let firstCharacterWasLowerCaseY
+  let firstCharacterWasLowerCaseY = false
 
   // Detect initial `y`, make sure it never matches.
   if (
@@ -99,7 +101,7 @@ export function stemmer(value) {
     result = result.slice(0, -1)
   }
 
-  /** @type {RegExpMatchArray} */
+  /** @type {RegExpMatchArray|null} */
   let match
 
   // Step 1b.

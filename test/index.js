@@ -7,7 +7,7 @@ import {URL} from 'node:url'
 import test from 'tape'
 import {stemmer} from '../index.js'
 
-/** @type {Object.<string, unknown>} */
+/** @type {Record<string, unknown>} */
 const pack = JSON.parse(
   String(fs.readFileSync(new URL('../package.json', import.meta.url)))
 )
@@ -48,6 +48,7 @@ test('cli', function (t) {
     t.deepEqual([error, stdout, stderr], [null, 'detest vile\n', ''], 'stdin')
   })
 
+  assert(subprocess.stdin, 'expected `stdin` on child process')
   input.pipe(subprocess.stdin)
   input.write('detestable')
   setImmediate(function () {
